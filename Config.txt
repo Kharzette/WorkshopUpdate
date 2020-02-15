@@ -3,7 +3,12 @@
 SteamCmdPath	C:/Games/SteamCMD	
 GameAppID		440900
 ServerAppID		443030
+
+//this is for conan's modlist.txt, optional
 //ModListPath		C:/OptionalPath
+
+//the order given here will be reflected in
+//modlist.txt (if modlistpath provided)
 Mod				1877326722
 Mod				1817449940
 Mod				1240417562
