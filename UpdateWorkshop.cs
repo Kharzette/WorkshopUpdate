@@ -160,6 +160,9 @@ namespace UpdateWorkshop
 			sr.Close();
 			fs.Close();
 
+			fs	=null;
+			sr	=null;
+
 			Console.WriteLine("SteamCmd Path is: " + steamCmdPath);
 			Console.WriteLine("InstallDir is: " + installDir);
 			Console.WriteLine("Game AppID is: " + gameAppID);
@@ -173,6 +176,8 @@ namespace UpdateWorkshop
 					" +workshop_download_item " + gameAppID + " " + mod + " +quit");
 
 				scProc.WaitForExit();
+
+				scProc.Close();
 			}
 
 			if(modListPath != "")
@@ -201,7 +206,14 @@ namespace UpdateWorkshop
 				{
 					Console.WriteLine("modlist.txt doesn't exist, making one...");
 
-					fs	=new FileStream(txtFilePath, FileMode.CreateNew, FileAccess.Write);
+					if(!Directory.Exists(modListPath))
+					{
+						Console.WriteLine("Path: " + modListPath + " does not exist...");
+					}
+					else
+					{
+						fs	=new FileStream(txtFilePath, FileMode.CreateNew, FileAccess.Write);
+					}
 				}
 
 				if(fs == null)
@@ -240,6 +252,13 @@ namespace UpdateWorkshop
 			}
 
 			Console.WriteLine("Done!");
+		}
+
+
+		//for conan servers
+		static void EditModList()
+		{
+
 		}
 
 
