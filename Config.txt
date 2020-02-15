@@ -1,0 +1,10 @@
+SteamCmdPath	C:/Games/SteamCMD
+GameAppID		440900
+ServerAppID		443030
+ModListPath		C:/OptionalPath
+Mod				1877326722
+Mod				1817449940
+Mod				1240417562
+Mod				1254664175
+Mod				863041645
+Mod				862116109
