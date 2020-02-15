@@ -182,73 +182,7 @@ namespace UpdateWorkshop
 
 			if(modListPath != "")
 			{
-				Console.WriteLine("Mod list path provided, will update...");
-
-				string	txtFilePath	="";
-				if(modListPath.EndsWith(".txt"))
-				{
-					//they point to the actual file
-					txtFilePath	=modListPath;
-				}
-				else
-				{
-					//pointed at the folder
-					txtFilePath	=modListPath + "\\" + "modlist.txt";
-				}
-
-				if(File.Exists(txtFilePath))
-				{
-					Console.WriteLine("Mod list found, editing...");
-
-					fs	=new FileStream(txtFilePath, FileMode.Open, FileAccess.Write);
-				}
-				else
-				{
-					Console.WriteLine("modlist.txt doesn't exist, making one...");
-
-					if(!Directory.Exists(modListPath))
-					{
-						Console.WriteLine("Path: " + modListPath + " does not exist...");
-					}
-					else
-					{
-						fs	=new FileStream(txtFilePath, FileMode.CreateNew, FileAccess.Write);
-					}
-				}
-
-				if(fs == null)
-				{
-					Console.WriteLine("Unable to open modlist.txt");
-					return;
-				}
-
-				StreamWriter	sw	=new StreamWriter(fs);
-				if(sw == null)
-				{
-					Console.WriteLine("Unable to open modlist.txt");
-					return;
-				}
-
-				foreach(KeyValuePair<int, string> mod in sModPaths)
-				{
-					DirectoryInfo	di	=new DirectoryInfo(mod.Value);
-
-					FileInfo	[]fi	=di.GetFiles("*.pak", SearchOption.TopDirectoryOnly);
-					if(fi.Length == 0)
-					{
-						Console.WriteLine("Mod " + mod.Key + " has no pak file...");
-						continue;
-					}
-					else if(fi.Length > 1)
-					{
-						Console.WriteLine("Mod " + mod.Key + " has more than one pak file...");
-					}
-
-					sw.WriteLine(mod.Value + "\\" + fi[0].Name);
-				}
-
-				sw.Close();
-				fs.Close();
+				EditModList(modListPath);
 			}
 
 			Console.WriteLine("Done!");
@@ -256,9 +190,77 @@ namespace UpdateWorkshop
 
 
 		//for conan servers
-		static void EditModList()
+		static void EditModList(string modListPath)
 		{
+			Console.WriteLine("Mod list path provided, will update...");
 
+			string	txtFilePath	="";
+			if(modListPath.EndsWith(".txt"))
+			{
+				//they point to the actual file
+				txtFilePath	=modListPath;
+			}
+			else
+			{
+				//pointed at the folder
+				txtFilePath	=modListPath + "\\" + "modlist.txt";
+			}
+
+			FileStream	fs	=null;
+
+			if(File.Exists(txtFilePath))
+			{
+				Console.WriteLine("Mod list found, editing...");
+
+				fs	=new FileStream(txtFilePath, FileMode.Open, FileAccess.Write);
+			}
+			else
+			{
+				Console.WriteLine("modlist.txt doesn't exist, making one...");
+
+				if(!Directory.Exists(modListPath))
+				{
+					Console.WriteLine("Path: " + modListPath + " does not exist...");
+				}
+				else
+				{
+					fs	=new FileStream(txtFilePath, FileMode.CreateNew, FileAccess.Write);
+				}
+			}
+
+			if(fs == null)
+			{
+				Console.WriteLine("Unable to open modlist.txt");
+				return;
+			}
+
+			StreamWriter	sw	=new StreamWriter(fs);
+			if(sw == null)
+			{
+				Console.WriteLine("Unable to open modlist.txt");
+				return;
+			}
+
+			foreach(KeyValuePair<int, string> mod in sModPaths)
+			{
+				DirectoryInfo	di	=new DirectoryInfo(mod.Value);
+
+				FileInfo	[]fi	=di.GetFiles("*.pak", SearchOption.TopDirectoryOnly);
+				if(fi.Length == 0)
+				{
+					Console.WriteLine("Mod " + mod.Key + " has no pak file...");
+					continue;
+				}
+				else if(fi.Length > 1)
+				{
+					Console.WriteLine("Mod " + mod.Key + " has more than one pak file...");
+				}
+
+				sw.WriteLine(mod.Value + "\\" + fi[0].Name);
+			}
+
+			sw.Close();
+			fs.Close();
 		}
 
 
