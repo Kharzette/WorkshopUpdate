@@ -1,7 +1,9 @@
-SteamCmdPath	C:/Games/SteamCMD
+//C++ style comments work, but only at the beginning
+//SteamCMD can be grabbed at https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
+SteamCmdPath	C:/Games/SteamCMD	
 GameAppID		440900
 ServerAppID		443030
-ModListPath		C:/OptionalPath
+//ModListPath		C:/OptionalPath
 Mod				1877326722
 Mod				1817449940
 Mod				1240417562
