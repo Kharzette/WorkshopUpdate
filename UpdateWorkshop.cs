@@ -357,9 +357,15 @@ namespace UpdateWorkshop
 		}
 
 
-		//quotify string
+		//quotify string if needed
 		static string QS(string inStr)
 		{
+			if(!inStr.Contains(" "))
+			{
+				//no need
+				return	inStr;
+			}
+
 			if(!inStr.StartsWith("\""))
 			{
 				inStr	="\"" + inStr;
