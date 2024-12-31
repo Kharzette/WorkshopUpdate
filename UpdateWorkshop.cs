@@ -97,7 +97,6 @@ namespace UpdateWorkshop
 					steamCmdPath	=line.Substring(pathStart);
 
 					steamCmdPath	=steamCmdPath.TrimEnd(' ', '\t');
-					steamCmdPath	+="/steamcmd.exe";
 
 					continue;
 				}

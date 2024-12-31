@@ -1,6 +1,6 @@
 //C++ style comments work, but only at the beginning
 //SteamCMD can be grabbed at https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip
-SteamCmdPath	C:/Games/SteamCMD	
+SteamCmdPath	C:/Games/SteamCMD/steamcmd.exe
 GameAppID		440900
 ServerAppID		443030
 
