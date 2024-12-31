@@ -8,7 +8,7 @@ namespace UpdateWorkshop
 {
 	class Program
 	{
-		static Dictionary<int, string>	sModPaths	=new Dictionary<int, string>();
+		static Dictionary<long, string>	sModPaths	=new Dictionary<long, string>();
 
 		static void Main(string []args)
 		{
@@ -35,10 +35,10 @@ namespace UpdateWorkshop
 
 			string		steamCmdPath	="";
 			string		installDir		="";
-			int			gameAppID		=0;
-			int			serverAppID		=0;
+			long		gameAppID		=0;
+			long		serverAppID		=0;
 			string		modListPath		="";
-			List<int>	mods			=new List<int>();
+			List<long>	mods			=new List<long>();
 
 			while(!sr.EndOfStream)
 			{
@@ -114,7 +114,7 @@ namespace UpdateWorkshop
 				}
 				else if(cname == "GameAppID")
 				{
-					if(!int.TryParse(toks[idx], out gameAppID))
+					if(!long.TryParse(toks[idx], out gameAppID))
 					{
 						Console.WriteLine("Bad token looking for game app id.");
 						continue;
@@ -122,7 +122,7 @@ namespace UpdateWorkshop
 				}
 				else if(cname == "ServerAppID")
 				{
-					if(!int.TryParse(toks[idx], out serverAppID))
+					if(!long.TryParse(toks[idx], out serverAppID))
 					{
 						Console.WriteLine("Bad token looking for server app id.");
 						continue;
@@ -141,8 +141,8 @@ namespace UpdateWorkshop
 				}
 				else if(cname == "Mod")
 				{
-					int	modID	=0;
-					if(!int.TryParse(toks[idx], out modID))
+					long	modID	=0;
+					if(!long.TryParse(toks[idx], out modID))
 					{
 						Console.WriteLine("Bad token looking for mod id.");
 						continue;
@@ -170,7 +170,7 @@ namespace UpdateWorkshop
 
 			//Console.ReadKey();
 
-			foreach(int mod in mods)
+			foreach(long mod in mods)
 			{
 				Process	scProc	=FireProcess(QS(steamCmdPath), "+login anonymous" +
 					" +workshop_download_item " + gameAppID + " " + mod + " +quit");
@@ -241,7 +241,7 @@ namespace UpdateWorkshop
 				return;
 			}
 
-			foreach(KeyValuePair<int, string> mod in sModPaths)
+			foreach(KeyValuePair<long, string> mod in sModPaths)
 			{
 				DirectoryInfo	di	=new DirectoryInfo(mod.Value);
 
@@ -281,8 +281,8 @@ namespace UpdateWorkshop
 
 				modString	=modString.Substring(0, endIdx);
 
-				int	modID	=0;
-				if(!int.TryParse(modString, out modID))
+				long	modID	=0;
+				if(!long.TryParse(modString, out modID))
 				{
 					Console.WriteLine("Failed to grab download dir...");
 					return;
